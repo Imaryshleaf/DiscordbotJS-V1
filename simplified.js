@@ -1,4 +1,3 @@
-const { messageFilter } = require('./schema')
 const Discord = require('discord.js');
 class Moderation {
     constructor(client) {
@@ -91,69 +90,6 @@ class Moderation {
            result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
-    }
-    async EnableFilter(listener, args) {
-        const userInput = String(args).replace('<@&', "").replace('>', "")
-        if (!userInput) return listener.channel.send('Please provide a role id to ignore!')
-        const roleID = listener.guild.roles.cache.get(userInput)
-        if (!roleID) return listener.channel.send("That is invalid role id.")
-        messageFilter.findOne({
-            ChannelID: listener.channel.id,
-            IgnoreRole: roleID.id,
-            serverID: listener.guild.id
-        }, (error, data) => {
-            if (error) return listener.channel.send(`MongoDB Error :: [${error}] :: Error.`)
-            if (!data) {
-                const newFilter = new messageFilter({
-                    ChannelID: listener.channel.id,
-                    IgnoreRole: roleID.id,
-                    serverID: listener.guild.id
-                })
-                newFilter.save().then(rest => console.log(rest)).catch(err => console.log(err)).then(listener.react('✅'))
-            } else {
-                listener.channel.send("Data already exists.")
-            }
-        })
-    }
-    async DisableFilter(listener, args) {
-        const userInput = String(args).replace('<@&', "").replace('>', "")
-        if (!userInput) return listener.channel.send('Please provide a role id to disable!')
-        const roleID = listener.guild.roles.cache.get(userInput)
-        if (!roleID) return listener.channel.send("That is invalid role id.")
-        messageFilter.findOneAndDelete({
-            IgnoreRole: roleID.id,
-            ChannelID: listener.channel.id,
-            serverID: listener.guild.id
-        }, (error, data) => {
-            if (error) return listener.channel.send(`MongoDB Error :: [${error}] :: Error.`)
-            if (!data) return listener.channel.send("Data not exists.")
-            console.log(data); listener.react('✅')
-        })
-    }
-    async DataFilter(listener){
-        messageFilter.find({ serverID: listener.guild.id }).sort([['descending']]).exec((error, result) => {
-            if (error) return listener.channel.send(`MongoDB Error :: [${error}] :: Error.`)
-            const emWhiteList = new Discord.MessageEmbed()
-            .setTitle('Message Filter')
-            if (result.length === 0) {
-                emWhiteList.setColor("RED")
-                emWhiteList.setDescription("No data found")
-                emWhiteList.setFooter(`${listener.guild.name}`, listener.guild.iconURL())
-                emWhiteList.setTimestamp()
-            } else if (result.length < 41 ) {
-                const dataName = [];    result.map(data => data.ChannelID).forEach(data => dataName.push(`<#${data}>`));
-                const dataRole = [];    result.map(data => data.IgnoreRole).forEach(data => dataRole.push(`<@&${data}>`))
-                const dataID = [];    result.map(data => data.IgnoreRole).forEach(data => dataID.push(`${data}`))
-                emWhiteList.setColor("GREEN")
-                emWhiteList.setDescription("\`\`\`Links are get deleted if member who don't have the following role(s).\`\`\`")
-                emWhiteList.addField(`Channel(s)`, `${dataName.join('\n') || "None"}`,true)
-                emWhiteList.addField(`Role(s)`, `${dataRole.join('\n') || "None"}`,true)
-                emWhiteList.addField(`Role ID`, `${dataID.join('\n') || "None"}`,true)
-                emWhiteList.setFooter(`${listener.guild.name}`, listener.guild.iconURL())
-                emWhiteList.setTimestamp();
-            }
-            return listener.channel.send(emWhiteList).catch(()=>{})
-        })
     }
 }
 
