@@ -305,5 +305,5 @@ async function index(){
     process.on('unhandledRejection', error =>       { Print(`Unhandled-promise-rejection: ${error}`)})
     process.on('uncaughtExceptionMonitor', error => { Print(`Uncaught-exception-monitor: ${error}`)})
     // Login
-    client.login("ODAxNjAzMzY0MTQ4MzQ3MDEx.YAjFTw.9_bswoFOAf_YmO1SU65rR1qoj-M")
+    client.login(process.env.TOKEN)
 } index().catch(err => console.log(`Index Error :: ${err} :: Please go back to the file and find the problem!`))
