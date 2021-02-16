@@ -210,15 +210,15 @@ async function index(){
                         if (timestamps.has(message.author.id)) {
                             await getcommand.launch(client, message, args);
                         }
-                        console.log("Executed")
+                       // console.log("Executed")
                     } else {
-                        console.log("Cannot execute commands")
-                        // // For all developers - enable (except members) 
-                        // if (DeveloperID.some(async devID => message.author.id === devID)) {
-                        //     if (timestamps.has(message.author.id)) {
-                        //         await getcommand.launch(client, message, args);
-                        //     }
-                        // }
+                        //console.log("Cannot execute commands")
+                        // For all developers - enable (except members) 
+                        if (DeveloperID.some(async devID => message.author.id === devID)) {
+                            if (timestamps.has(message.author.id)) {
+                                await getcommand.launch(client, message, args);
+                            }
+                        }
                     }
                 })
             } catch (err) { 
