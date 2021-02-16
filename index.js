@@ -61,7 +61,7 @@ async function index(){
         const developerName = client.users.cache.get(developer)
         const participantName = client.users.cache.get(participant)
 		//client.user.setActivity(`${users.toString()} users with ${Prefix} | Currently is underdevelopment by ${developerName.username}, ${ownerName.username} and ${participantName.username}`, {
-        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU21421`, {
+        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU21621`, {
             type: 'LISTENING',
         })
     })
@@ -108,6 +108,9 @@ async function index(){
                 if (await Command(message, Prefix, 'restart')) {
                     MongoDB().then(message.react('✅').catch(()=>{}))
                 }
+            }
+            if (await Command(message, Prefix, 'brawlhalla')) {
+                await Importer("brawlhalla", "software", client, message)
             }
         } Messages().catch(err => console.log(`Failed to process message. Error :: ${err} :: Please fix the script carefully!`))
     })
