@@ -214,7 +214,7 @@ async function index(){
                     } else {
                         //console.log("Cannot execute commands")
                         // For all developers - enable (except members) 
-                        if (DeveloperID.some(async devID => message.author.id === devID)) {
+                        if (DeveloperID.includes(message.author.id)) {
                             if (timestamps.has(message.author.id)) {
                                 await getcommand.launch(client, message, args);
                             }
