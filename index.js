@@ -60,7 +60,7 @@ async function index(){
         const ownerName = client.users.cache.get(owner)
         const developerName = client.users.cache.get(developer)
         const participantName = client.users.cache.get(participant)
-		//client.user.setActivity(`${users.toString()} users with ${Prefix} | Currently is underdevelopment by ${developerName.username}, ${ownerName.username} and ${participantName.username}`, {
+	    //client.user.setActivity(`${users.toString()} users with ${Prefix} | Currently is underdevelopment by ${developerName.username}, ${ownerName.username} and ${participantName.username}`, {
         client.user.setActivity(`${users.toString()} users with ${Prefix} - LU21621`, {
             type: 'LISTENING',
         })
@@ -210,16 +210,20 @@ async function index(){
                         if (timestamps.has(message.author.id)) {
                             await getcommand.launch(client, message, args);
                         }
+                        console.log("Executed")
                     } else {
-                        // For all developers - enable (except members) 
-                        if (DeveloperID.some(async devID => message.author.id === devID)) {
-                            if (timestamps.has(message.author.id)) {
-                                await getcommand.launch(client, message, args);
-                            }
-                        }
+                        console.log("Cannot execute commands")
+                        // // For all developers - enable (except members) 
+                        // if (DeveloperID.some(async devID => message.author.id === devID)) {
+                        //     if (timestamps.has(message.author.id)) {
+                        //         await getcommand.launch(client, message, args);
+                        //     }
+                        // }
                     }
                 })
-            } catch (err) { return; }
+            } catch (err) { 
+                return; 
+            }
         } Messages().catch(err => console.log(`Failed to process message. Error :: ${err} :: Please fix the script carefully!`))
     })
     // Auto delete garbage
@@ -301,5 +305,5 @@ async function index(){
     process.on('unhandledRejection', error =>       { Print(`Unhandled-promise-rejection: ${error}`)})
     process.on('uncaughtExceptionMonitor', error => { Print(`Uncaught-exception-monitor: ${error}`)})
     // Login
-    client.login(process.env.TOKEN)
+    client.login("ODAxNjAzMzY0MTQ4MzQ3MDEx.YAjFTw.9_bswoFOAf_YmO1SU65rR1qoj-M")
 } index().catch(err => console.log(`Index Error :: ${err} :: Please go back to the file and find the problem!`))
