@@ -15,6 +15,7 @@ module.exports = {
     status: "Active",
     launch: async(client, message, args) => {
         try {
+            if (message.channel.nsfw == false) return await message.channel.send("Please run this command in `nsfw` channel!")
             // User input
             let inp1 = args[0]; let inp2 = args[1];
             if (!inp1) return await message.channel.send("Please provide at least 1 tag!")

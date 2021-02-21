@@ -1,8 +1,12 @@
 from Naked.toolshed.shell import execute_js, muterun_js
+import sys
+import os
 
-result = execute_js('index.js')
+def resource_path(relative_path):
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
-if result:
-	print("JavaScript is successfully executed")
-else:
-	print("JavaScript is failed")
+try:
+	execute_js(resource_path('./index.js'))
+except:
+	pass

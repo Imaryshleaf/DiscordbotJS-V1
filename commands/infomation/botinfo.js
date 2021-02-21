@@ -3,13 +3,13 @@ const { Prefix, CommandsHyoerlink } = require('../../settings.json')
 
 module.exports = {
     name: `botinfo`,
-    desc: `Show bot information`,
+    desc: `Displays User And Bot Latency`,
     usage: `\`${Prefix}botinfo\``,
     category: `Information`,
     accessibly: `Everyone`,
     aliases: ['botinfo'],
     cooldown: 10,
-    details: `[botinfo](${CommandsHyoerlink} 'Display bot information')`,
+    details: `[botinfo](${CommandsHyoerlink} 'Displays User And Bot Latency')`,
     permissions: [ ],
     status: "Active",
     launch: async(client, message, args) => {

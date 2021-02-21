@@ -3,6 +3,7 @@ async function index(){
     const Discord = require('discord.js');
     const client = new Discord.Client({disableMentions: 'everyone', ws: { intents: Discord.Intents.ALL }});
     const { redBright,greenBright,yellowBright,blueBright,magentaBright,cyanBright,whiteBright } = require('chalk')
+    
     // Commands
     const fs = require('fs')
     client.commands = new Discord.Collection();
@@ -10,6 +11,7 @@ async function index(){
     const cooldowns = new Discord.Collection();
     client.categories = fs.readdirSync("./commands/");
     ["command"].forEach(handler => { require(`./commands/handlers/${handler}`)(client);});
+    
     // Custom Module
     const Moderation = require('./simplified')
     const Mod = new Moderation(client);
@@ -48,7 +50,7 @@ async function index(){
     let Importer = async function Importer(data, category, client, message)     { try { return require(`./commands/${category}/${data}.js`)(client, message) } catch (error) { return; } }
 
     // Client Event
-    client.on('ready', ()=>{
+    client.on('ready', () => {
         Print(`[DB-JS] :: Name:     : ${client.user.username}.`)
         Print(`[DB-JS] :: ID        : ${client.user.id}`)
         Print(`[DB-JS] :: Prefix    : ${Prefix}`)
@@ -64,7 +66,18 @@ async function index(){
         client.user.setActivity(`${users.toString()} users with ${Prefix} - LU21621`, {
             type: 'LISTENING',
         })
+        readyLog('811756217453117461')
+        async function readyLog(channelLogs) {
+            const now = new Date(Date.now())
+            const channel = client.channels.cache.get(channelLogs)
+            const embed = new Discord.MessageEmbed()
+            .setColor('#70f7c1')
+            .setAuthor(`${client.user.username}`, `${client.user.displayAvatarURL()}`)
+            .setDescription(`System has been restarted at \`${now}\`.\nPossible causes:\n> ・ Dyno restarted\n> ・ Development process`)
+            await channel.send(embed)
+        }
     })
+    
     // Raw event -- Helper
     client.on('raw', packet => {
         let eventT = packet.t
@@ -72,6 +85,7 @@ async function index(){
         if (!['MESSAGE_CREATE'].includes(eventT)) return;
         // Code;
     })
+    
     // Messaging
     client.on('message', async (message) => {
         async function Messages() {
@@ -114,6 +128,7 @@ async function index(){
             }
         } Messages().catch(err => console.log(`Failed to process message. Error :: ${err} :: Please fix the script carefully!`))
     })
+    
     // Functions
     client.on('message', async (message) => {
         if (message.author.bot) return;
@@ -166,6 +181,7 @@ async function index(){
             }
         })
     })
+    
     // Commands
     client.on('message', async(message) => {
         async function Messages() {
@@ -210,10 +226,10 @@ async function index(){
                         if (timestamps.has(message.author.id)) {
                             await getcommand.launch(client, message, args);
                         }
-                       // console.log("Executed")
+                        console.log("Executed")
                     } else {
-                        //console.log("Cannot execute commands")
-                        // For all developers - enable (except members) 
+                        console.log("Cannot execute commands")
+                        // // For all developers - enable (except members) 
                         if (DeveloperID.includes(message.author.id)) {
                             if (timestamps.has(message.author.id)) {
                                 await getcommand.launch(client, message, args);
@@ -226,6 +242,7 @@ async function index(){
             }
         } Messages().catch(err => console.log(`Failed to process message. Error :: ${err} :: Please fix the script carefully!`))
     })
+    
     // Auto delete garbage
     client.on("channelDelete", async(channel) => {
         let targetChannel = channel;
@@ -261,6 +278,7 @@ async function index(){
             console.log("Whitelisted channels are automatically deleted from database")
         })
     })
+    
     // Auto delete garbage
     client.on("roleDelete", async(role) => {
         let targetRole = role;
@@ -288,22 +306,28 @@ async function index(){
             }
         })
     })
+    
     // Handle shard error
     client.on('shardError', m =>                    { Print(`Shard Error: ${m}`) })
     client.on('shardReconnecting', m =>             { Print(`Shard ${m}: Reconnecting`) })
     client.on('shardDisconnect', m =>               { Print(`Shard ${m}: Disconnected`) })
     client.on('shardReady', m =>                    { Print(`Shard ${m}: Connected`) })
     client.on('shardResume', m =>                   { Print(`Shard ${m}: Disconected`) })
+    
     // Warning and Error
     client.on('warn', w =>                          { Print('Warn', `Warning: ${w}`) })
     client.on('error', e =>                         { Print('Error', `Error: ${e}`) })
+    
     // Connection Error
     client.on('disconnect', () =>                   { Print(`\x1b[32m${client.user.username}\x1b[0m : Disconected.`) });
     client.on('reconnecting', () =>                 { Print(`\x1b[32m${client.user.username}\x1b[0m  : Reconnecting.`) })
+    
     // Error Messages
     process.on('uncaughtException', error =>        { Print(`Uncaught-exception: ${error}`)});
     process.on('unhandledRejection', error =>       { Print(`Unhandled-promise-rejection: ${error}`)})
     process.on('uncaughtExceptionMonitor', error => { Print(`Uncaught-exception-monitor: ${error}`)})
+    
     // Login
     client.login(process.env.TOKEN)
+    
 } index().catch(err => console.log(`Index Error :: ${err} :: Please go back to the file and find the problem!`))

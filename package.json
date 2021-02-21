@@ -16,7 +16,10 @@
     "cheerio": "^1.0.0-rc.5",
     "danbooru": "^3.1.0",
     "discord.js": "^12.5.1",
+    "mathjs": "^9.2.0",
     "mongoose": "^5.11.13",
+    "node-fetch": "^2.6.1",
+    "relevant-urban": "^2.0.0",
     "request": "^2.88.2",
     "wikipedia": "^1.0.1"
   },

@@ -4,8 +4,8 @@ const wiki = require('wikipedia')
 
 module.exports = {
     name: `wiki`,
-    desc: `Search an information from wikipedia article. Remember, wikipedia isn't always a reliable source.`,
-    usage: `\`${Prefix}wiki <query>\``,
+    desc: `Search an information from wikipedia article.`,
+    usage: `\`${Prefix}wiki <search terms>\``,
     category: `Search`,
     accessibly: `Everyone`,
     aliases: ["wikipedia", "wiki"],

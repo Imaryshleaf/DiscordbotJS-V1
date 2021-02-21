@@ -21,6 +21,7 @@ module.exports = {
             const cmdImages = [];
             const cmdSearch = [];
             const cmdUtilities = [];
+            const cmdServer = [];
             if (!args[0]) {
                 readdirSync("./commands/").forEach(dir => {
                     const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
@@ -43,6 +44,9 @@ module.exports = {
                             if (key.category == "Utilities") {
                                 cmdUtilities.push(key.details)
                             }
+                            if (key.category == "Server") {
+                                cmdServer.push(key.details)
+                            }
                         }
                     }
                 })
@@ -51,11 +55,12 @@ module.exports = {
                 .setAuthor(`${client.user.username}'s Help Menu`, client.user.displayAvatarURL())
                 .setTitle(`${Prefix}help`)
                 .setDescription(`Type \`${Prefix}help [command]\` to show detailed information.`)
-                .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, true)
-                .addField("👙 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, true)
-                .addField("⚙️ | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, false)
                 .addField("🔍 | Search", `${cmdSearch.join(" ")|| "None"}`, true)
                 .addField("🌇 | Images", `${cmdImages.join(" ")|| "None"}`, true)
+                .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, false) // -- Mid
+                .addField("💬 | Server", `${cmdServer.join(" ")|| "None"}`, true)
+                .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, true)
+                .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, false) // -- Mid
                 .setFooter(`©️ ${client.user.username} - ${client.commands.size} commands • Hover over commands for info!`,`${client.user.displayAvatarURL()}`)
                 message.channel.send(embedHelp) 
             } else {
