@@ -59,8 +59,8 @@ module.exports = {
                 .addField("🌇 | Images", `${cmdImages.join(" ")|| "None"}`, true)
                 .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, false) // -- Mid
                 .addField("💬 | Server", `${cmdServer.join(" ")|| "None"}`, true)
-                .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, false)
-                .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, true) // -- Mid
+                .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, true)
+                .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, false) // -- Mid
                 .setFooter(`©️ ${client.user.username} - ${client.commands.size} commands • Hover over commands for info!`,`${client.user.displayAvatarURL()}`)
                 message.channel.send(embedHelp) 
             } else {
