@@ -21,7 +21,7 @@ module.exports = {
             const cmdImages = [];
             const cmdSearch = [];
             const cmdUtilities = [];
-            const cmdGuild = [];
+            const cmdServer = [];
             const cmdFun = [];
             const cmdAnalyze = [];
             if (!args[0]) {
@@ -46,8 +46,8 @@ module.exports = {
                             if (key.category == "Utilities") {
                                 cmdUtilities.push(key.details)
                             }
-                            if (key.category == "Guild") {
-                                cmdGuild.push(key.details)
+                            if (key.category == "Server") {
+                                cmdServer.push(key.details)
                             }
                             if (key.category == "Fun") {
                                 cmdFun.push(key.details)
@@ -67,7 +67,7 @@ module.exports = {
                 .addField("🌇 | Images", `${cmdImages.join(" ")|| "None"}`, true)
                 .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, false) // -- Mid
                 .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, true)
-                .addField("💬 | Server", `${cmdGuild.join(" ")|| "None"}`, true)
+                .addField("💬 | Server", `${cmdServer.join(" ")|| "None"}`, true)
                 .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, false) // -- Mid
                 .addField("🎲 | Fun", `${cmdFun.join(" ")|| "None"}`, true)
                 .addField("🔎 | Analyze", `${cmdAnalyze.join(" ")|| "None"}`, true)
