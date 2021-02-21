@@ -57,9 +57,9 @@ module.exports = {
                 .setDescription(`Type \`${Prefix}help [command]\` to show detailed information.`)
                 .addField("🔍 | Search", `${cmdSearch.join(" ")|| "None"}`, true)
                 .addField("🌇 | Images", `${cmdImages.join(" ")|| "None"}`, true)
-                .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, true) // -- Mid
+                .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, false) // -- Mid
                 .addField("💬 | Server", `${cmdServer.join(" ")|| "None"}`, true)
-                .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, true)
+                .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, false)
                 .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, true) // -- Mid
                 .setFooter(`©️ ${client.user.username} - ${client.commands.size} commands • Hover over commands for info!`,`${client.user.displayAvatarURL()}`)
                 message.channel.send(embedHelp) 
