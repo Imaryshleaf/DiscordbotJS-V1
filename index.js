@@ -63,7 +63,7 @@ async function index(){
         const developerName = client.users.cache.get(developer)
         const participantName = client.users.cache.get(participant)
 	    //client.user.setActivity(`${users.toString()} users with ${Prefix} | Currently is underdevelopment by ${developerName.username}, ${ownerName.username} and ${participantName.username}`, {
-        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU21621`, {
+        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU:2/21/21`, {
             type: 'LISTENING',
         })
         readyLog('811756217453117461')

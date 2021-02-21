@@ -5,7 +5,7 @@ module.exports = {
     name: `age`,
     desc: `Get info about how old someone born in a certain year is.`,
     usage: `\`${Prefix}age <year>\``,
-    category: `analyze`,
+    category: `Analyze`,
     accessibly: `Everyone`,
     aliases: ["age"],
     cooldown: 5,

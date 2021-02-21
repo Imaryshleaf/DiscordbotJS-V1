@@ -21,7 +21,9 @@ module.exports = {
             const cmdImages = [];
             const cmdSearch = [];
             const cmdUtilities = [];
-            const cmdServer = [];
+            const cmdGuild = [];
+            const cmdFun = [];
+            const cmdAnalyze = [];
             if (!args[0]) {
                 readdirSync("./commands/").forEach(dir => {
                     const commands = readdirSync(`./commands/${dir}/`).filter(file => file.endsWith(".js"));
@@ -44,8 +46,14 @@ module.exports = {
                             if (key.category == "Utilities") {
                                 cmdUtilities.push(key.details)
                             }
-                            if (key.category == "Server") {
-                                cmdServer.push(key.details)
+                            if (key.category == "Guild") {
+                                cmdGuild.push(key.details)
+                            }
+                            if (key.category == "Fun") {
+                                cmdFun.push(key.details)
+                            }
+                            if (key.category == "Analyze") {
+                                cmdAnalyze.push(key.details)
                             }
                         }
                     }
@@ -58,11 +66,13 @@ module.exports = {
                 .addField("🔍 | Search", `${cmdSearch.join(" ")|| "None"}`, true)
                 .addField("🌇 | Images", `${cmdImages.join(" ")|| "None"}`, true)
                 .addField("ℹ️ | Information", `${cmdInformation.join(" ")|| "None"}`, false) // -- Mid
-                .addField("💬 | Server", `${cmdServer.join(" ")|| "None"}`, true)
                 .addField("🔧 | Utilities ", `${cmdUtilities.join(" ")|| "None"}`, true)
+                .addField("💬 | Server", `${cmdGuild.join(" ")|| "None"}`, true)
                 .addField("👒 | Danbooru", `${cmdDanbooru.join(" ")|| "None"}`, false) // -- Mid
+                .addField("🎲 | Fun", `${cmdFun.join(" ")|| "None"}`, true)
+                .addField("🔎 | Analyze", `${cmdAnalyze.join(" ")|| "None"}`, true)
                 .setFooter(`©️ ${client.user.username} - ${client.commands.size} commands • Hover over commands for info!`,`${client.user.displayAvatarURL()}`)
-                message.channel.send(embedHelp) 
+                await message.channel.send(embedHelp) 
             } else {
                 // Detailed information about the command.
                 let CommandInfo = client.commands.get(client.aliases.get(args[0].toLowerCase()) || args[0].toLowerCase())

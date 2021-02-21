@@ -5,7 +5,7 @@ module.exports = {
     name: `character-count`,
     desc: `Counting how much total character from your text`,
     usage: `\`${Prefix}character-count <text>\``,
-    category: `analyze`,
+    category: `Analyze`,
     accessibly: `Everyone`,
     aliases: ['character-count', 'chars'],
     cooldown: 5,
