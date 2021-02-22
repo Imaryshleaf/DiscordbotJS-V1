@@ -79,7 +79,7 @@ class Moderation {
         totalSeconds %= 3600;
         let minutes = Math.floor(totalSeconds / 60);
         let seconds = Math.floor(totalSeconds % 60);
-        let uptime = `${days} Days - ${hours} Hours - ${minutes} Mminutes - ${seconds} Seconds`;
+        let uptime = `${days} Days ${hours} Hours ${minutes} Mminutes ${seconds} Seconds`;
         return uptime;
     }
     async Password(length) {

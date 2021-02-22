@@ -18,6 +18,8 @@ async function index(){
     const Listener = require('./listener')
     const Listen = new Listener(client); Listen.Now(true);
     const { messageFilter, whitelist } = require('./schema')
+    const Awaiting = require('./resources/modules/awaiting')
+    const waitFor = new Awaiting()
 
     // Online Database
     const mongoose = require("mongoose");
@@ -63,7 +65,7 @@ async function index(){
         const developerName = client.users.cache.get(developer)
         const participantName = client.users.cache.get(participant)
 	    //client.user.setActivity(`${users.toString()} users with ${Prefix} | Currently is underdevelopment by ${developerName.username}, ${ownerName.username} and ${participantName.username}`, {
-        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU:2/21/21`, {
+        client.user.setActivity(`${users.toString()} users with ${Prefix} - LU:2/22/21`, {
             type: 'LISTENING',
         })
         readyLog('811756217453117461')
@@ -117,7 +119,7 @@ async function index(){
                     await message.channel.send(`${await Mod.Password(16) || "I broke the code"}`)
                 }
                 if (await Command(message, Prefix, 'uptime')) {
-                    await message.channel.send(`\`${await Mod.Uptime() || "I broke the time"}\``)
+                    await message.channel.send(`${await Mod.Uptime() || "I broke the time"}`, {code:'diff'})
                 }
                 if (await Command(message, Prefix, 'restart')) {
                     MongoDB().then(message.react('✅').catch(()=>{}))
@@ -328,6 +330,7 @@ async function index(){
     process.on('uncaughtExceptionMonitor', error => { Print(`Uncaught-exception-monitor: ${error}`)})
     
     // Login
-    client.login(process.env.TOKEN)
+    const { Key } = require('./settings.json')
+    client.login(process.env.TOKEN || Key)
     
 } index().catch(err => console.log(`Index Error :: ${err} :: Please go back to the file and find the problem!`))
