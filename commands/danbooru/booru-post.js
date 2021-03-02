@@ -1,9 +1,7 @@
 const Discord = require('discord.js')
-const { Prefix, CommandsHyoerlink } = require('../../settings.json')
+const { Prefix, CommandsHyoerlink, DanbooruLogin, DanooruApiKey } = require('../../settings.json')
 const Danbooru = require('danbooru')
-const login = 'alxevia'
-const key = 'uPDiWM4Dj35tXJ9FXMuSpF8Z'
-const booru = new Danbooru(`https://${login}:${key}@danbooru.donmai.us`) /* @sonohara */
+const booru = new Danbooru(`https://${DanbooruLogin}:${DanooruApiKey}@danbooru.donmai.us`) /* @sonohara */
 
 module.exports = {
     name: `booru.post`,
@@ -29,7 +27,7 @@ module.exports = {
             const url = booru.url(post.file_url)
             if (url === undefined) return await message.channel.send("Sorry, I'm unable to process the image")
             const embed = new Discord.MessageEmbed()
-            .setDescription(`[Danbooru - Post#${postID}](${url.origin} '${post.tag_string}')`)
+            .setDescription(`[Danbooru - Post#${postID}](${url.href} '${post.tag_string}')`)
             .setImage(url).setTimestamp().setColor('#fff497')
             // Evaluate the output
             if (url === 'https://danbooru.donmai.us/') return await message.channel.send("Please provide another tags!")

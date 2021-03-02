@@ -1,9 +1,7 @@
 const Discord = require('discord.js')
-const { Prefix, CommandsHyoerlink } = require('../../settings.json')
+const { Prefix, CommandsHyoerlink, DanbooruLogin, DanooruApiKey } = require('../../settings.json')
 const Danbooru = require('danbooru')
-const login = 'alxevia'
-const key = 'uPDiWM4Dj35tXJ9FXMuSpF8Z'
-const booru = new Danbooru(`https://${login}:${key}@danbooru.donmai.us`) /* @sonohara */
+const booru = new Danbooru(`https://${DanbooruLogin}:${DanooruApiKey}@danbooru.donmai.us`) /* @sonohara */
 
 module.exports = {
     name: `booru.random`,
@@ -35,7 +33,7 @@ module.exports = {
                 /*Get log information about the post*/ // console.log(url.origin); console.log(post.tag_string);
                 // Create embed
                 const embed = new Discord.MessageEmbed()
-                .setDescription(`[Danbooru](${url.origin} '${post.tag_string}')`)
+                .setDescription(`[Danbooru](${url.href} '${post.tag_string}')`)
                 .setImage(url).setTimestamp().setColor('#c0af68')
                 // Evaluate the output
                 if (url === 'https://danbooru.donmai.us/') return await message.channel.send("Please provide another tags!")

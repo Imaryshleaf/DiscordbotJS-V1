@@ -26,6 +26,8 @@ module.exports = {
                     if (!data) {
                         const newFilter = new messageFilter({
                             serverID: `${message.guild.id}_MessageFilter`,
+                            callbackMessageFText: "No text messages are allowed in this channel",
+                            callbackMessageFLink: "No links are allowed in this channel",
                             allowRolestoText: [],
                             allowRolestoLink: [],
                             filterText: [],
@@ -127,20 +129,19 @@ module.exports = {
                     serverID: `${message.guild.id}_MessageFilter`,
                 }, async(error, data) => {
                     if (error) return console.log(`MongoDB Error :: [${error}] :: Error.`);
-                    if (data) return message.channel.send("✅ | Successfully delete \`Message Filter\` from this server")
+                    if (data) return message.channel.send("✅ | Successfully delete \`message filter collection\` from this server")
                     console.log(data)
                 })
             } else if (option === 'help') {
                 const embed = new Discord.MessageEmbed()
                 .setColor("GOLD").setTitle("Message Filter - Help").setTimestamp()
-                .setDescription(`\`${Prefix}filter create\` to create new \`Message Filter\`. \`${Prefix}filter delete\` to delete whole \`Message Filter\` data. \`${Prefix}filter text\` to \`enable\` and \`disable\` filter text messages. Note: \`Filter Role\` will give a user permission to bypass \`Filter Text\` or \`Filter Link\` and it apply in every channels. \`Filter Messages\` will delete \`text messages\` and \`links\` **except** for all **attachments**.`)
                 .addField("⚒️ | Commands", 
-                    `:one: | \`${Prefix}filter create\`\n`+
-                    `:two: | \`${Prefix}filter <text|link>\`\n`+
-                    `:three: | \`${Prefix}filter role <role|roleID> <-text|-link>\`\n`+
-                    `:four: | \`${Prefix}filter delete\`\n`+
-                    `:five: | \`${Prefix}filter help\`\n`+
-                    `:six: | \`${Prefix}filter collection\``
+                    `:one: | \`${Prefix}filter create\` : Create new collection\n`+
+                    `:two: | \`${Prefix}filter <text|link>\` : enable/disable filter for any text except attachments\n`+
+                    `:three: | \`${Prefix}filter role <role|roleID> <-text|-link>\` : add/remove role to bypass filter message in every channels.\n`+
+                    `:four: | \`${Prefix}filter delete\` : erase the entire collection of message filter\n`+
+                    `:five: | \`${Prefix}filter help\` : display help for using this command\n`+
+                    `:six: | \`${Prefix}filter collection\` : display message filter collection`
                 )
                 .setFooter(`Powered by ${client.user.username}`, client.user.displayAvatarURL())
                 await message.channel.send(embed).catch(()=>{})
@@ -165,12 +166,12 @@ module.exports = {
                             embed.setTimestamp()
                         } else if (data.length < 31) {
                             embed.setColor("GREEN")
-                            embed.addField("ℹ️ | Role whitelist", `> Enable/disable whitelisted roles, run \`${Prefix}filter role <role|roleID> <-text|-link>\`. If \`a role is in list\`, user/members \`allowed to bypass\` from message filter in every channels.`)
-                            embed.addField(`Bypass Filter Text`, `${allowedRolestoText.join("\n") || "None"}`,true)
-                            embed.addField(`Bypass Filter Link`, `${allowedRolestoLink.join("\n") || "None"}`,true)
-                            embed.addField("ℹ️ | Message Filter", `> Enable/disable Message Filter, run \`${Prefix}filter <text|link>\`. If \`Message Filter\` enabled, \`text/link\` messages will be deleted except for a user/members who have the whitelisted role.`)
+                            embed.addField("ℹ️ | Message Filter", `> Enable/disable Message Filter, run \`${Prefix}filter <text|link>\`. `)
                             embed.addField(`Channel Filter Text`, `${channeltofilterText.join("\n") || "None"}`,true)
                             embed.addField(`Channel Filter Link`, `${channeltofilterLink.join("\n") || "None"}`,true)
+                            embed.addField("ℹ️ | Role whitelist", `> Enable/disable whitelisted roles, run \`${Prefix}filter role <role|roleID> <-text|-link>\`.`)
+                            embed.addField(`Bypass Filter Text`, `${allowedRolestoText.join("\n") || "None"}`,true)
+                            embed.addField(`Bypass Filter Link`, `${allowedRolestoLink.join("\n") || "None"}`,true)
                             embed.setFooter(`${message.guild.name}`, message.guild.iconURL())
                             embed.setTimestamp();
                         }
@@ -179,7 +180,7 @@ module.exports = {
                         return message.channel.send(`❌ | This server don't have \`Message Filter\`. Run command \`${Prefix}filter create\` to create new one`)
                     }
                 })
-            } else if (option === 'prune-choose') {
+            } else if (option === 'deleteby') {
                 if (!input) return await message.channel.send("Please provide a role id!")
                 messageFilter.findOne({ // -- Not delete but update
                     serverID: `${message.guild.id}_MessageFilter`,

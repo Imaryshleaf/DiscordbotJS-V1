@@ -8,7 +8,7 @@ module.exports = {
     usage: `\`${Prefix}booru_random <tag1|tag2>\``,
     category: `Danbooru`,
     accessibly: `Everyone`,
-    aliases: ["booru-random"],
+    aliases: ["booru_random"],
     cooldown: 5,
     details: `[booru_random](${CommandsHyoerlink} 'Get a random image post from danbooru by tags')`,
     permissions: [ ],

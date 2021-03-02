@@ -2,5 +2,8 @@
     "Prefix": "!",
     "CommandsHyoerlink": "https://discord.gg/mpwhJkN5VW",
     "Key": "ODAxNjAzMzY0MTQ4MzQ3MDEx.YAjFTw.9_bswoFOAf_YmO1SU65rR1qoj-M",
+    "DanbooruLogin": "alxevia",
+    "DanooruApiKey": "uPDiWM4Dj35tXJ9FXMuSpF8Z",
+    "MongodbSRV": "mongodb+srv://Mavfymongodbcluster:Mavfymongodbcluster@mavfy-cluster.cqqt5.mongodb.net/Mavydb",
     "Developers": ["802906117318770688", "714486020594204754", "764104520614674434", "764098459912634390"]
 }
